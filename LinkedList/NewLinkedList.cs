@@ -66,11 +66,32 @@ namespace LinkedListTask
         public LinkedListNode<T> GetNode(int nodeNumber) //Метод возвращающий ноду с требуемым индексом
         {
             var indexOfNode = head;
-            for (int i = 0; i < nodeNumber; i++)
+
+            try
             {
-                indexOfNode = indexOfNode.Next;
+                if (!IsExistNode(nodeNumber))
+                {
+                    throw new IndexOutOfRangeException();
+                }
+                else
+                {
+                    for (int i = 0; i < nodeNumber; i++)
+                    {
+                        indexOfNode = indexOfNode.Next;
+                    }
+                    return indexOfNode;
+                }
             }
-            return indexOfNode;
+            catch (IndexOutOfRangeException e)
+            {
+                Console.WriteLine($"Ошибка: {e.Message}");
+                throw;
+            }
+        }
+
+        public T? GetValue(int index) //Метод, возвращающий значение ноды по индексу
+        {
+            return GetNode(index).Data;
         }
 
         public bool Contains(T data) //Метод, для проверки существования элемента в списке
@@ -153,6 +174,23 @@ namespace LinkedListTask
             {
                 GetNode(index - 1).Next.Data = newData;
             }
+        }
+
+        public void Reverse()
+        {
+            LinkedListNode<T>? previousNode = null;
+            var currentNode = head;
+            var nextNode = head.Next;
+
+            while (nextNode != null)
+            {
+                currentNode.Next = previousNode;
+                previousNode = currentNode;
+                currentNode = nextNode;
+                nextNode = currentNode.Next;
+            }
+            currentNode.Next = previousNode;
+            head = currentNode;
         }
 
         public void CountOfNodes(NewLinkedList<T> linkedList)

@@ -104,7 +104,24 @@ namespace LinkedList.Tests
             Assert.AreEqual("alpha, beta, gamma, d", checkList.toString());
             checkList.ChangeNodeValue("delta", 3);
             Assert.AreEqual("alpha, beta, gamma, delta", checkList.toString());
+        }
+        
+        [Test]
+        public void GetValueTest()
+        {
+            var checkList = Initialization();
+            Assert.AreEqual("a", checkList.GetValue(0));
+            Assert.AreEqual("d", checkList.GetValue(3));
+        }
 
+        [Test]
+        public void ReverseTest()
+        {
+            var checkList = Initialization();
+            checkList.Reverse();
+            Assert.AreEqual("d, c, b, a", checkList.toString());
+            checkList.Reverse();
+            Assert.AreEqual("a, b, c, d", checkList.toString());
         }
 
         public NewLinkedList<string> Initialization()

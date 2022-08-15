@@ -36,6 +36,13 @@ namespace Program
             linkedList.Print(linkedList);
 
             linkedList.CountOfNodes(linkedList);
+            Console.WriteLine();
+
+            Console.WriteLine(linkedList.GetValue(1));
+            Console.WriteLine();
+
+            linkedList.Reverse();
+            linkedList.Print(linkedList);
         }
     }
 }
